@@ -1,6 +1,6 @@
-# postgres connection string
+# postgres local connection string
 # postgres://<username>:<password>@localhost:<port>/<db_name>?sslmode=disable
-DB_URL='postgres://postgres:postgres@localhost:5432/test-books?sslmode=disable'
+DB_URL='postgres://postgres:root@localhost:5432/book_store?sslmode=disable'
 
 # путь к файлам миграции
 MG_PATH='database/migrations'
@@ -20,8 +20,8 @@ mg_up:
 	@migrate -database ${DB_URL} -path $(MG_PATH) up
 	@echo "Миграция выполнена!"
 
-# Откат миграций
+# Откат всех миграций
 mg_down:
-	@echo "Откат миграции БД!"
+	@echo "Откат всех миграции БД!"
 	@migrate -database ${DB_URL} -path $(MG_PATH) down
 	@echo "Все миграции откачены!"

@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/revel/revel"
 )
@@ -11,7 +10,9 @@ var db *sql.DB
 
 // Инициализация Подключения к Базе данных
 func InitDB() {
-	connstring := fmt.Sprintf("user=%s password='%s' dbname=%s sslmode=disable", "postgres", "postgres", "test-books")
+	// Берем "db.url" из app.conf (или передаем как env-переменную для докера)
+	connstring := revel.Config.StringDefault("db.url", "")
+	revel.AppLog.Infof("DB connstring: ", connstring)
 
 	var err error
 	db, err = sql.Open("postgres", connstring)
