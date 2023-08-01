@@ -10,9 +10,17 @@
 			<label for="author">Выберите автора</label>
 			<select name="author" id="author" class="form-control" {{if .filter}}disabled{{end}}>
 				<option {{ if eq .authorId ("")}}selected{{end}}  value="">Любой</option>
-				{{ range $author := .authors }}
-				<option {{ if eq $.authorId (print .ID)}} selected {{end}}  value="{{ .ID }}">{{ .Name }}</option>
+				
+				{{ if .filter }}
+					{{ range $author := .allAuthors }}
+					<option {{ if eq $.authorId (print .ID)}} selected {{end}}  value="{{ .ID }}">{{ .Name }}</option>
+					{{ end }}
+				{{ else }}
+					{{ range $author := .authors }}
+					<option {{ if eq $.authorId (print .ID)}} selected {{end}}  value="{{ .ID }}">{{ .Name }}</option>
+					{{ end }}
 				{{ end }}
+					
 
 				<option {{ if eq .authorId ("null")}}selected{{end}} value="null">Без автора</option>
 			</select>
@@ -23,9 +31,17 @@
 			<label for="publisher">Выберите издательство</label>
 			<select name="publisher" id="publisher" class="form-control" {{if .filter}}disabled{{end}}>
 				<option {{ if eq .publisherId ("")}}selected{{end}} value="">Любое</option>
-				{{ range $author := .publishers }}
-				<option {{ if eq $.publisherId (print .ID)}}selected{{end}} value="{{ .ID }}">{{ .Name }}</option>
+				
+				{{ if .filter }}
+					{{ range $author := .allPublishers }}
+					<option {{ if eq $.publisherId (print .ID)}}selected{{end}} value="{{ .ID }}">{{ .Name }}</option>
+					{{ end }}
+				{{ else }}
+					{{ range $author := .publishers }}
+					<option {{ if eq $.publisherId (print .ID)}}selected{{end}} value="{{ .ID }}">{{ .Name }}</option>
+					{{ end }}
 				{{ end }}
+
 				<option {{ if eq .publisherId ("null")}}selected{{end}} value="null">Неизданное</option>
 			</select>
 		</div>

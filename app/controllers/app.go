@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"revel-pg-testtask/app/models"
+
 	_ "github.com/lib/pq"
 	"github.com/revel/revel"
 )
@@ -12,22 +14,7 @@ type App struct {
 // Полные списки книг/авторов/издательств
 func (c App) Index() revel.Result {
 	// Получаем все книги
-	books, err := allBooks()
-	if err != nil {
-		panic(err)
-	}
-
-	// Получаем всех авторов
-	authors, err := allAuthors()
-	if err != nil {
-		panic(err)
-	}
-
-	// Получаем все издательства
-	publishers, err := allPublishers()
-	if err != nil {
-		panic(err)
-	}
+	books, authors, publishers := getAllData()
 
 	// Отрисовываем страничку
 	return c.Render(books, authors, publishers)
@@ -66,8 +53,35 @@ func (c App) FilterLists() revel.Result {
 		panic(err)
 	}
 
+	// Получаем полные списки авторов/издательств (для корректного отображения выделенного значения в селектах)
+	_, allAuthors, allPublishers := getAllData()
+
 	// доп.аргумент для отрисовки кнопки "показать все" в подмодуле filter.html
 	filter := true
 	// Отрисовываем страничку
-	return c.Render(books, authors, publishers, filter, authorId, publisherId)
+	return c.Render(books, authors, publishers, filter, authorId, publisherId, allAuthors, allPublishers)
+}
+
+// Получение полных списков
+// Для FilterLists отсюда можно взять полные списки Авторов/Издателей для корректного вывода выбранного фильтра в селектах
+func getAllData() ([]models.Book, []models.Author, []models.Publisher) {
+	// Получаем все книги
+	books, err := allBooks()
+	if err != nil {
+		panic(err)
+	}
+
+	// Получаем всех авторов
+	authors, err := allAuthors()
+	if err != nil {
+		panic(err)
+	}
+
+	// Получаем все издательства
+	publishers, err := allPublishers()
+	if err != nil {
+		panic(err)
+	}
+
+	return books, authors, publishers
 }
