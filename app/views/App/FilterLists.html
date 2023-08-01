@@ -1,14 +1,9 @@
-<style>
-	body {
-		padding-bottom: 30px;
-	}
-</style>
-
 <!-- Установка поля title у страницы -->
-{{set . "title" "Списки книг, авторов и издательств"}}
+{{set . "title" "Отфильтрованные списки книг, авторов и издательств"}}
 <!-- Блок <head> -->
 {{template "header.html" .}}
 
+<!-- TODO: selected input -->
 <!-- Основной контент страницы -->
 <div class="container-fluid">
 	<!-- Таблицы -->
@@ -126,6 +121,9 @@
 
 			<!-- Кнопка "Показать" -->
 			<button type="submit" class="btn btn-primary btn-block">Показать</button>
+
+			<!-- Кнопка "Домой" -->
+			<a href="/" class="btn btn-primary btn-block">Показать все</a>
 		</form>
 	</div>
 </div>
