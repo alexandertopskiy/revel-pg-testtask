@@ -1,29 +1,32 @@
+<!-- Форма фильтрации и кнопка "Показать" -->
 <div class="col-md-2 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+	<!-- Заголовок -->
 	<h1 class="page-header text-center">Фильтр</h1>
-	<!-- TODO: selected input -->
+
 	<!-- Форма для фильтрации -->
 	<form method="post" action="/filter" class="form-horizontal">
 		<!-- Выбор автора -->
 		<div class="form-group">
 			<label for="author">Выберите автора</label>
-			<select name="author" id="author" class="form-control">
-				<option value="">Любой</option>
+			<select name="author" id="author" class="form-control" {{if .filter}}disabled{{end}}>
+				<option {{ if eq .authorId ("")}}selected{{end}}  value="">Любой</option>
 				{{ range $author := .authors }}
-				<option value="{{ .ID }}">{{ .Name }}</option>
+				<option {{ if eq $.authorId (print .ID)}} selected {{end}}  value="{{ .ID }}">{{ .Name }}</option>
 				{{ end }}
-				<option value="null">Без автора</option>
+
+				<option {{ if eq .authorId ("null")}}selected{{end}} value="null">Без автора</option>
 			</select>
 		</div>
 
 		<!-- Выбор издательства -->
 		<div class="form-group">
 			<label for="publisher">Выберите издательство</label>
-			<select name="publisher" id="publisher" class="form-control">
-				<option value="">Любое</option>
+			<select name="publisher" id="publisher" class="form-control" {{if .filter}}disabled{{end}}>
+				<option {{ if eq .publisherId ("")}}selected{{end}} value="">Любое</option>
 				{{ range $author := .publishers }}
-				<option value="{{ .ID }}">{{ .Name }}</option>
+				<option {{ if eq $.publisherId (print .ID)}}selected{{end}} value="{{ .ID }}">{{ .Name }}</option>
 				{{ end }}
-				<option value="null">Неизданное</option>
+				<option {{ if eq .publisherId ("null")}}selected{{end}} value="null">Неизданное</option>
 			</select>
 		</div>
 
