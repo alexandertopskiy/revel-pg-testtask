@@ -1,0 +1,21 @@
+<!-- Блок <head> -->
+{{template "header.html" .}}
+
+<!-- Основной контент страницы -->
+<div class="container-fluid">
+	<!-- Таблицы -->
+	{{template "lists.html" .}}
+
+	<!-- Блок фильтрации списков -->
+	{{ template "filter.html" .}}
+</div>
+
+<!-- Окно для отображения ошибки -->
+<div class="container">
+	<div class="row">
+		<div class="span6">{{template "flash.html" .}}</div>
+	</div>
+</div>
+
+<!-- В футере есть кнопка панели для дебага -->
+<!-- {{template "footer.html" .}} -->

@@ -1,0 +1,83 @@
+<!-- Таблицы -->
+<div class="col-md-10 row">
+	<!-- Список книг -->
+	<div class="col-md-8 col-md-offset-2">
+		<h1 class="page-header text-center">Книги</h1>
+
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Название</th>
+						<th>Автор</th>
+						<th>Издательство</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{range .books}}
+					<tr>
+						<td>{{.ID}}</td>
+						<td>{{.Title}}</td>
+						<td>{{.Author}}</td>
+						<td>{{.Publisher}}</td>
+					</tr>
+					{{end}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Список авторов / издательств -->
+	<div class="col-md-8 col-md-offset-2">
+		<div class="row">
+			<!-- Список авторов -->
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<h1 class="page-header text-center">Авторы</h1>
+
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Имя автора</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{range .authors}}
+							<tr>
+								<td>{{.ID}}</td>
+								<td>{{.Name}}</td>
+							</tr>
+							{{end}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- Список издательств -->
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<h1 class="page-header text-center">Издательства</h1>
+
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered text-right">
+						<thead>
+							<tr>
+								<th class="text-right">#</th>
+								<th class="text-right">Название издательства</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{range .publishers}}
+							<tr>
+								<td>{{.ID}}</td>
+								<td>{{.Name}}</td>
+							</tr>
+							{{end}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

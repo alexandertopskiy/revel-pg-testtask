@@ -87,6 +87,8 @@ func (c App) FilterLists() revel.Result {
 		panic(err)
 	}
 
+	// доп.аргумент для отрисовки кнопки "показать все" в подмодуле filter.html
+	filter := true
 	// Отрисовываем страничку
-	return c.Render(books, authors, publishers)
+	return c.Render(books, authors, publishers, filter, authorId, publisherId)
 }
