@@ -27,6 +27,11 @@
 						<td>{{.Author}}</td>
 						<td>{{.Publisher}}</td>
 					</tr>
+					{{else}}
+					<!-- Если в массиве .books нет элементов -->
+					<tr class="text-center">
+						<td colspan="4">Ничего не найдено</td>
+					</tr>
 					{{end}}
 				</tbody>
 			</table>
@@ -59,6 +64,11 @@
 								<td>{{.ID}}</td>
 								<td>{{.Name}}</td>
 							</tr>
+							{{else}}
+							<!-- Если в массиве .authors нет элементов -->
+							<tr class="text-center">
+								<td colspan="2">Ничего не найдено</td>
+							</tr>
 							{{end}}
 						</tbody>
 					</table>
@@ -87,6 +97,11 @@
 							<tr>
 								<td>{{.ID}}</td>
 								<td>{{.Name}}</td>
+							</tr>
+							{{else}}
+							<!-- Если в массиве .publishers нет элементов -->
+							<tr class="text-center">
+								<td colspan="2">Ничего не найдено</td>
 							</tr>
 							{{end}}
 						</tbody>
