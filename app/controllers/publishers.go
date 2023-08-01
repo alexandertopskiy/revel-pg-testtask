@@ -20,7 +20,7 @@ func allPublishers() ([]models.Publisher, error) {
 
 // Получение Издательств с условием
 func filteredPublishers(authorQuery string, publisherQuery string) ([]models.Publisher, error) {
-	var query = getFilteredPublishers + getPublisherCondition(authorQuery, publisherQuery) + " order by publisher_id;"
+	var query = getFilteredPublishers + makePublisherCondition(authorQuery, publisherQuery) + " order by publisher_id;"
 
 	publishers, err := getPublishers(query)
 
@@ -56,8 +56,8 @@ func getPublishers(query string) ([]models.Publisher, error) {
 	return publishers, err
 }
 
-// Получение полного условия для запроса "Издательства"
-func getPublisherCondition(authorQuery string, publisherQuery string) string {
+// Составление полного условия для запроса "Издательства"
+func makePublisherCondition(authorQuery string, publisherQuery string) string {
 	var condition string
 	if authorQuery != "" && publisherQuery != "" {
 		condition = "where " + authorQuery + " AND P." + publisherQuery
@@ -65,6 +65,20 @@ func getPublisherCondition(authorQuery string, publisherQuery string) string {
 		condition = "where " + authorQuery
 	} else if publisherQuery != "" {
 		condition = "where P." + publisherQuery
+	}
+
+	return condition
+}
+
+// Получение из publisherId условия-строки для фильтра по издательствам
+func getPublisherCondition(publisherId string) string {
+	var condition string
+	if publisherId == "null" {
+		condition += "publisher_id is NULL"
+	} else if publisherId == "" {
+		condition += ""
+	} else {
+		condition += "publisher_id = " + publisherId
 	}
 
 	return condition

@@ -20,7 +20,7 @@ func allAuthors() ([]models.Author, error) {
 
 // Получение Авторов с условием
 func filteredAuthors(authorQuery string, publisherQuery string) ([]models.Author, error) {
-	var query = getFilteredAuthors + getAuthorCondition(authorQuery, publisherQuery) + " order by AP.author_id;"
+	var query = getFilteredAuthors + makeAuthorCondition(authorQuery, publisherQuery) + " order by AP.author_id;"
 
 	authors, err := getAuthors(query)
 
@@ -56,8 +56,8 @@ func getAuthors(query string) ([]models.Author, error) {
 	return authors, err
 }
 
-// Получение полного условия для запроса "Авторы"
-func getAuthorCondition(authorQuery string, publisherQuery string) string {
+// Составление полного условия для запроса "Авторы"
+func makeAuthorCondition(authorQuery string, publisherQuery string) string {
 	var condition string
 
 	if authorQuery != "" && publisherQuery != "" {
@@ -66,6 +66,20 @@ func getAuthorCondition(authorQuery string, publisherQuery string) string {
 		condition = "where A." + authorQuery
 	} else if publisherQuery != "" {
 		condition = "where " + publisherQuery
+	}
+
+	return condition
+}
+
+// Получение из authorId условия-строки для фильтра по авторам
+func getAuthorCondition(authorId string) string {
+	var condition string
+	if authorId == "null" {
+		condition += "author_id is NULL"
+	} else if authorId == "" {
+		condition += ""
+	} else {
+		condition += "author_id = " + authorId
 	}
 
 	return condition

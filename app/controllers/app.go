@@ -37,37 +37,16 @@ func (c App) Index() revel.Result {
 func (c App) FilterLists() revel.Result {
 	// получаем из формы id автора (если указан)
 	authorId := c.Params.Get("author")
-	// составляем условие для фильтра по авторам
-	var authorCondition string
-	if authorId == "null" {
-		authorCondition += "author_id is NULL"
-	} else if authorId == "" {
-		authorCondition += ""
-	} else {
-		authorCondition += "author_id = " + authorId
-	}
+	// получаем sql-условие для фильтра по авторам
+	authorCondition := getAuthorCondition(authorId)
 
 	// получаем из формы id издательства (если указано)
 	publisherId := c.Params.Get("publisher")
-	// составляем условие для фильтра по издательствам
-	var publisherCondition string
-	if publisherId == "null" {
-		publisherCondition += "publisher_id is NULL"
-	} else if publisherId == "" {
-		publisherCondition += ""
-	} else {
-		publisherCondition += "publisher_id = " + publisherId
-	}
+	// получаем sql-условие для фильтра по издательствам
+	publisherCondition := getPublisherCondition(publisherId)
 
 	// составляем полное условие фильтрации
-	var fullCondition string
-	if authorCondition != "" && publisherCondition != "" {
-		fullCondition = "where " + authorCondition + " AND " + publisherCondition
-	} else if authorCondition != "" {
-		fullCondition = "where " + authorCondition
-	} else if publisherCondition != "" {
-		fullCondition = "where " + publisherCondition
-	}
+	fullCondition := makeFullCondition(authorCondition, publisherCondition)
 
 	// Получаем отфильтрованные книги
 	books, err := filteredBooks(fullCondition)

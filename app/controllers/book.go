@@ -105,3 +105,17 @@ func getRelatedDataFor(bookId int, query string) (string, error) {
 
 	return result, err
 }
+
+// Составление полного условия для запроса "Книги"
+func makeFullCondition(authorCondition string, publisherCondition string) string {
+	var fullCondition string
+	if authorCondition != "" && publisherCondition != "" {
+		fullCondition = "where " + authorCondition + " AND " + publisherCondition
+	} else if authorCondition != "" {
+		fullCondition = "where " + authorCondition
+	} else if publisherCondition != "" {
+		fullCondition = "where " + publisherCondition
+	}
+
+	return fullCondition
+}
