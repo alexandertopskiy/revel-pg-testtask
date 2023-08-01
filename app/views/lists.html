@@ -1,7 +1,7 @@
 <!-- Таблицы Книг/Авторов/Издательств -->
 <div class="col-md-10 row">
 	<!-- Список книг -->
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 		<!-- Название таблицы -->
 		<h1 class="page-header text-center">Книги</h1>
 
@@ -11,10 +11,10 @@
 				<!-- Заголовок таблицы -->
 				<thead>
 					<tr>
-						<th>#</th>
-						<th>Название</th>
-						<th>Автор</th>
-						<th>Издательство</th>
+						<th class="text-center">ID</th>
+						<th class="text-center">Название</th>
+						<th class="text-center">Автор</th>
+						<th class="text-center">Издательство</th>
 					</tr>
 				</thead>
 
@@ -22,7 +22,7 @@
 				<tbody>
 					{{range .books}}
 					<tr>
-						<td>{{.ID}}</td>
+						<td class="text-center">{{.ID}}</td>
 						<td>{{.Title}}</td>
 						<td>{{.Author}}</td>
 						<td>{{.Publisher}}</td>
@@ -39,10 +39,10 @@
 	</div>
 
 	<!-- Список авторов / издательств -->
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
 		<div class="row">
 			<!-- Список авторов -->
-			<div class="col-md-6 col-sm-6 col-xs-6">
+			<div class="col-md-6 col-sm-6 col-sm-offset-0 col-xs-6 col-xs-offset-3">
 				<!-- Название таблицы -->
 				<h1 class="page-header text-center">Авторы</h1>
 
@@ -52,8 +52,8 @@
 						<!-- Заголовок таблицы -->
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>Имя автора</th>
+								<th class="text-center">ID</th>
+								<th class="text-center">Имя автора</th>
 							</tr>
 						</thead>
 
@@ -61,7 +61,7 @@
 						<tbody>
 							{{range .authors}}
 							<tr>
-								<td>{{.ID}}</td>
+								<td class="text-center">{{.ID}}</td>
 								<td>{{.Name}}</td>
 							</tr>
 							{{else}}
@@ -76,18 +76,18 @@
 			</div>
 
 			<!-- Список издательств -->
-			<div class="col-md-6 col-sm-6 col-xs-6">
+			<div class="col-md-6 col-sm-6 col-sm-offset-0 col-xs-6 col-xs-offset-3">
 				<!-- Название таблицы -->
 				<h1 class="page-header text-center">Издательства</h1>
 
 				<!-- Таблица -->
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered text-right">
+					<table class="table table-striped table-bordered">
 						<!-- Заголовок таблицы -->
 						<thead>
 							<tr>
-								<th class="text-right">#</th>
-								<th class="text-right">Название издательства</th>
+								<th class="text-center">ID</th>
+								<th class="text-center">Название издательства</th>
 							</tr>
 						</thead>
 
@@ -95,7 +95,7 @@
 						<tbody>
 							{{range .publishers}}
 							<tr>
-								<td>{{.ID}}</td>
+								<td class="text-center">{{.ID}}</td>
 								<td>{{.Name}}</td>
 							</tr>
 							{{else}}
